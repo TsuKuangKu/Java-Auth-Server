@@ -1,6 +1,7 @@
 package com.example.auth.repositories;
 
-import com.example.auth.models.EncyptedUser;
+import com.example.auth.models.EncryptedUser;
+import com.example.auth.models.Role;
 import com.example.auth.models.User;
 import com.example.auth.repositories.interfaces.UserRepository;
 import com.example.auth.utils.AESEncryptor;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 @Service
 public class UserRepositoryImpl implements UserRepository {
-    private final HashMap<String, EncyptedUser> userTable;
+    private final HashMap<String, EncryptedUser> userTable;
     private final SecretKeySpec secretKey;
 
     public UserRepositoryImpl() {
@@ -22,12 +23,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public boolean CreateUser(User user) {
         // TODO: add username and password format validation
-        String username = user.getUsername();
+        String username = user.username();
         if (this.userTable.containsKey(username)) {
             return false;
         }
-        byte[] encryptedPassword = AESEncryptor.Encrypt(secretKey, user.getPassword());
-        EncyptedUser encyptedUser = new EncyptedUser(username, encryptedPassword);
+        byte[] encryptedPassword = AESEncryptor.Encrypt(secretKey, user.password());
+        EncryptedUser encyptedUser = new EncryptedUser(username, encryptedPassword);
         this.userTable.put(username, encyptedUser);
         return true;
     }
@@ -38,6 +39,19 @@ public class UserRepositoryImpl implements UserRepository {
             return false;
         }
         this.userTable.remove(username);
+        return true;
+    }
+
+    @Override
+    public EncryptedUser GetUesr(String username) {
+        return this.userTable.get(username);
+    }
+
+    @Override
+    public boolean AssignRole(String username, Role role) {
+        EncryptedUser user = this.userTable.get(username);
+        user.AddRole(role);
+        this.userTable.put(username, user);
         return true;
     }
 }
