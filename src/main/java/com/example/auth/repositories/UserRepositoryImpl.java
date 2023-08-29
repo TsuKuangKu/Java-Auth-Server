@@ -8,6 +8,7 @@ import com.example.auth.utils.AESEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @Service
@@ -53,5 +54,15 @@ public class UserRepositoryImpl implements UserRepository {
         user.AddRole(role);
         this.userTable.put(username, user);
         return true;
+    }
+
+    @Override
+    public boolean IsValid(User user) {
+        EncryptedUser encryptedUser = this.userTable.get(user.username());
+        if (encryptedUser == null) {
+            return false;
+        }
+        byte[] encryptedPassword = AESEncryptor.Encrypt(secretKey, user.password());
+        return Arrays.equals(encryptedPassword, encryptedUser.password());
     }
 }

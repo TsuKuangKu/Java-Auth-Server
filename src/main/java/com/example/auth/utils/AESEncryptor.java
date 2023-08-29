@@ -30,6 +30,7 @@ public class AESEncryptor {
         }
     }
 
+    // TODO: remove the method.
     public static String Decrypt(SecretKeySpec key, byte[] encryptedContent) {
         try {
             Cipher cipher = Cipher.getInstance(algorithm);

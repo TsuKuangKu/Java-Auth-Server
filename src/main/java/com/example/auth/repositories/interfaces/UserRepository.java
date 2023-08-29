@@ -13,4 +13,6 @@ public interface UserRepository {
     EncryptedUser GetUesr(String username);
 
     boolean AssignRole(String username, Role role);
+
+    boolean IsValid(User user);
 }
