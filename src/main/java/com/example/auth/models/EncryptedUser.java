@@ -22,6 +22,10 @@ public class EncryptedUser {
         return password;
     }
 
+    public HashMap<String, Role> roles() {
+        return roles;
+    }
+
     public void AddRole(Role role) {
         this.roles.put(role.name(), role);
     }
