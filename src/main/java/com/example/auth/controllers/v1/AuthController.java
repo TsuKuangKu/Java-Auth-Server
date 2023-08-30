@@ -47,7 +47,7 @@ public class AuthController {
         }
 
         this.tokenRepository.InvalidateToken(token.id());
-        return ResponseEntity.status(HttpStatus.OK).body("The token is invalidate.");
+        return ResponseEntity.status(HttpStatus.OK).body("The token is invalidated.");
     }
 
     @GetMapping ("/roles/{roleName}")
