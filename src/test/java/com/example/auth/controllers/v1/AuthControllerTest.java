@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 class AuthControllerTest {
 
     @Test
-    void authenticate_whenUserInvalid_shouldReturnsUNAUTHORIZEDResponse() {
+    void authenticate_whenUserInvalid_shouldReturnUNAUTHORIZEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -35,7 +35,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void authenticate_whenUserValid_shouldReturnsOKResponseWithTokenId() {
+    void authenticate_whenUserValid_shouldReturnOKResponseWithTokenId() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -52,7 +52,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void invalidateToken_whenTokenInvalid_shouldReturnsUNAUTHORIZEDResponse() {
+    void invalidateToken_whenTokenInvalid_shouldReturnUNAUTHORIZEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -66,7 +66,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void invalidateToken_whenTokenValid_shouldReturnsOKResponse() {
+    void invalidateToken_whenTokenValid_shouldReturnOKResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -80,7 +80,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void isRoleAssigned_whenTokenInvalid_shouldReturnsUNAUTHORIZEDResponse() {
+    void isRoleAssigned_whenTokenInvalid_shouldReturnUNAUTHORIZEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -94,7 +94,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void isRoleAssigned_whenTokenValidRoleNotExisted_shouldReturnsOKResponseWithFalse() {
+    void isRoleAssigned_whenTokenValidRoleNotExisted_shouldReturnOKResponseWithFalse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -112,7 +112,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void isRoleAssigned_whenTokenValidRoleExisted_shouldReturnsOKResponseWithTrue() {
+    void isRoleAssigned_whenTokenValidRoleExisted_shouldReturnOKResponseWithTrue() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -125,7 +125,7 @@ class AuthControllerTest {
         mockEncryptedUser.AddRole(mockRole);
         when(tokenRepository.IsValid(mockToken.id())).thenReturn(true);
         when(tokenRepository.GetAuthToken(mockToken.id())).thenReturn(mockToken);
-        when(userRepository.GetUesr(mockUsername)).thenReturn(mockEncryptedUser);
+        when(userRepository.GetUser(mockUsername)).thenReturn(mockEncryptedUser);
         when(roleRepository.GetRole(mockRoleName)).thenReturn(mockRole);
 
         ResponseEntity<Boolean> response = authController.IsRoleAssigned(mockRoleName, mockToken);
@@ -135,7 +135,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void getRoles_whenTokenInvalid_shouldReturnsUNAUTHORIZEDResponse() {
+    void getRoles_whenTokenInvalid_shouldReturnUNAUTHORIZEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -149,7 +149,7 @@ class AuthControllerTest {
     }
 
     @Test
-    void getRoles_whenTokenValid_shouldReturnsOKResponseWithRoles() {
+    void getRoles_whenTokenValid_shouldReturnOKResponseWithRoles() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         TokenRepository tokenRepository = mock(TokenRepository.class);
@@ -160,7 +160,7 @@ class AuthControllerTest {
         Role mockRole = new Role(mockRoleName);
         EncryptedUser mockEncryptedUser = new EncryptedUser(mockUsername, null);
         mockEncryptedUser.AddRole(mockRole);
-        when(userRepository.GetUesr(mockUsername)).thenReturn(mockEncryptedUser);
+        when(userRepository.GetUser(mockUsername)).thenReturn(mockEncryptedUser);
         when(tokenRepository.IsValid(mockToken.id())).thenReturn(true);
         when(tokenRepository.GetAuthToken(mockToken.id())).thenReturn(mockToken);
 

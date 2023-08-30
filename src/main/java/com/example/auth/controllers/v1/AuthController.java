@@ -57,7 +57,7 @@ public class AuthController {
         }
         token = this.tokenRepository.GetAuthToken(token.id());
         Role role = this.roleRepository.GetRole(roleName);
-        EncryptedUser encryptedUser = this.userRepository.GetUesr(token.username());
+        EncryptedUser encryptedUser = this.userRepository.GetUser(token.username());
         if (role == null || encryptedUser == null || !encryptedUser.HasRole(role)) {
             return ResponseEntity.status(HttpStatus.OK).body(false);
         }
@@ -70,7 +70,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         token = this.tokenRepository.GetAuthToken(token.id());
-        EncryptedUser encryptedUser = this.userRepository.GetUesr(token.username());
+        EncryptedUser encryptedUser = this.userRepository.GetUser(token.username());
         return ResponseEntity.status(HttpStatus.OK).body(encryptedUser.roles());
     }
 }

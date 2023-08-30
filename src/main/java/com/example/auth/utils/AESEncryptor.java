@@ -29,15 +29,4 @@ public class AESEncryptor {
             throw new RuntimeException("Failed to encrypt content");
         }
     }
-
-    // TODO: remove the method.
-    public static String Decrypt(SecretKeySpec key, byte[] encryptedContent) {
-        try {
-            Cipher cipher = Cipher.getInstance(algorithm);
-            cipher.init(Cipher.DECRYPT_MODE, key);
-            return new String(cipher.doFinal(encryptedContent));
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to decrypt content");
-        }
-    }
 }

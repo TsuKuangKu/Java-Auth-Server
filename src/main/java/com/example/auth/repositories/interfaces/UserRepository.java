@@ -10,7 +10,7 @@ public interface UserRepository {
 
     boolean DeleteUser(String username);
 
-    EncryptedUser GetUesr(String username);
+    EncryptedUser GetUser(String username);
 
     boolean AssignRole(String username, Role role);
 

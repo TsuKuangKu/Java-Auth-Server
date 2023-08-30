@@ -19,6 +19,9 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Override
     public UUID GenerateToken(String username) {
+        if (username.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         UUID tokenId = UUID.randomUUID();
         AuthToken token = new AuthToken(tokenId, username);
         this.tokenTable.put(tokenId, token);

@@ -46,7 +46,7 @@ public class RoleController {
         if (role == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The role is not existed!");
         }
-        EncryptedUser encryptedUser = this.userRepository.GetUesr(user.username());
+        EncryptedUser encryptedUser = this.userRepository.GetUser(user.username());
         if (encryptedUser == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user is not existed!");
         }

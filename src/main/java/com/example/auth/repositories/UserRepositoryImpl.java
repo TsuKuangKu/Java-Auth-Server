@@ -44,12 +44,15 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public EncryptedUser GetUesr(String username) {
+    public EncryptedUser GetUser(String username) {
         return this.userTable.get(username);
     }
 
     @Override
     public boolean AssignRole(String username, Role role) {
+        if (role == null) {
+            return false;
+        }
         EncryptedUser user = this.userTable.get(username);
         user.AddRole(role);
         this.userTable.put(username, user);

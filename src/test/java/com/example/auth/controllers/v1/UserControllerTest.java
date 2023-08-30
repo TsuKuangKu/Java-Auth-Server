@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 class UserControllerTest {
 
     @Test
-    void createUser_whenUserNotExisted_shouldReturnsCREATEDResponse() {
+    void createUser_whenUserNotExisted_shouldReturnCREATEDResponse() {
         UserRepository userRepository = mock(UserRepository.class);
         UserController userController = new UserController(userRepository);
         User mockUser = new User("mockUserName", "12345678");
@@ -25,7 +25,7 @@ class UserControllerTest {
     }
 
     @Test
-    void createUser_whenUserExisted_shouldReturnsCONFLICTResponse() {
+    void createUser_whenUserExisted_shouldReturnCONFLICTResponse() {
         UserRepository userRepository = mock(UserRepository.class);
         UserController userController = new UserController(userRepository);
         User mockUser = new User("mockUserName", "12345678");
@@ -37,7 +37,7 @@ class UserControllerTest {
     }
 
     @Test
-    void deleteUser_whenUserExisted_shouldReturnsOKResponse() {
+    void deleteUser_whenUserExisted_shouldReturnOKResponse() {
         UserRepository userRepository = mock(UserRepository.class);
         UserController userController = new UserController(userRepository);
         String mockUsername = "mockUserName";
@@ -49,7 +49,7 @@ class UserControllerTest {
     }
 
     @Test
-    void deleteUser_whenUserNotExisted_shouldReturnsNOTFOUNDResponse() {
+    void deleteUser_whenUserNotExisted_shouldReturnNOTFOUNDResponse() {
         UserRepository userRepository = mock(UserRepository.class);
         UserController userController = new UserController(userRepository);
         String mockUsername = "mockUserName";

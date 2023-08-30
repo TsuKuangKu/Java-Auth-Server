@@ -7,7 +7,13 @@ public class AuthToken {
 
     private final UUID id;
     private final String username;
-    private final ZonedDateTime expiryDate;
+
+    // The method is testing only. Should not be called.
+    public void setExpiryDate(ZonedDateTime expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    private ZonedDateTime expiryDate;
 
     public AuthToken(UUID id, String username) {
         this.id = id;

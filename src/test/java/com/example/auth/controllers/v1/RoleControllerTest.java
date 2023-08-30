@@ -10,14 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class RoleControllerTest {
 
     @Test
-    void createRole_whenRoleNotExisted_shouldReturnsCREATEDResponse() {
+    void createRole_whenRoleNotExisted_shouldReturnCREATEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         RoleController roleController = new RoleController(roleRepository, null);
         Role mockRole = new Role("mockRoleName");
@@ -29,7 +28,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void createRole_whenRoleExisted_shouldReturnsCONFLICTEDResponse() {
+    void createRole_whenRoleExisted_shouldReturnCONFLICTEDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         RoleController roleController = new RoleController(roleRepository, null);
         Role mockRole = new Role("mockRoleName");
@@ -41,7 +40,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void deleteUser_whenRoleExisted_shouldReturnsOKResponse() {
+    void deleteUser_whenRoleExisted_shouldReturnOKResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         RoleController roleController = new RoleController(roleRepository, null);
         String mockRoleName = "mockRoleName";
@@ -53,7 +52,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void deleteUser_whenRoleNotExisted_shouldReturnsNOTFOUNDResponse() {
+    void deleteUser_whenRoleNotExisted_shouldReturnNOTFOUNDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         RoleController roleController = new RoleController(roleRepository, null);
         String mockRoleName = "mockRoleName";
@@ -65,7 +64,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void assignRoleToUser_whenRoleNotExisted_shouldReturnsNOTFOUNDResponse() {
+    void assignRoleToUser_whenRoleNotExisted_shouldReturnNOTFOUNDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         RoleController roleController = new RoleController(roleRepository, userRepository);
@@ -79,7 +78,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void assignRoleToUser_whenRoleExistedUserNotExisted_shouldReturnsNOTFOUNDResponse() {
+    void assignRoleToUser_whenRoleExistedUserNotExisted_shouldReturnNOTFOUNDResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         RoleController roleController = new RoleController(roleRepository, userRepository);
@@ -88,7 +87,7 @@ class RoleControllerTest {
         User mockUser = new User(mockUsername, "12345678");
         Role mockRole = new Role(mockRoleName);
         when(roleRepository.GetRole(mockRoleName)).thenReturn(mockRole);
-        when(userRepository.GetUesr(mockUsername)).thenReturn(null);
+        when(userRepository.GetUser(mockUsername)).thenReturn(null);
 
         ResponseEntity<String> response = roleController.AssignRoleToUser(mockRoleName, mockUser);
 
@@ -96,7 +95,7 @@ class RoleControllerTest {
     }
 
     @Test
-    void assignRoleToUser_whenRoleExistedUserExisted_shouldReturnsOKResponse() {
+    void assignRoleToUser_whenRoleExistedUserExisted_shouldReturnOKResponse() {
         RoleRepository roleRepository = mock(RoleRepository.class);
         UserRepository userRepository = mock(UserRepository.class);
         RoleController roleController = new RoleController(roleRepository, userRepository);
@@ -106,7 +105,7 @@ class RoleControllerTest {
         Role mockRole = new Role(mockRoleName);
         EncryptedUser mockEncryptedUser = new EncryptedUser(mockUsername, null);
         when(roleRepository.GetRole(mockRoleName)).thenReturn(mockRole);
-        when(userRepository.GetUesr(mockUsername)).thenReturn(mockEncryptedUser);
+        when(userRepository.GetUser(mockUsername)).thenReturn(mockEncryptedUser);
 
         ResponseEntity<String> response = roleController.AssignRoleToUser(mockRoleName, mockUser);
 
